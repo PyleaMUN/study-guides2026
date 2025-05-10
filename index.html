@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PyLEAMUN Resources</title>
+  <title>PyleaMUN Team</title>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <!-- Bootstrap CSS -->
@@ -14,50 +14,113 @@
       --teal: #006d7a;
       --gold: #c59d12;
       --cream: #f8f5ec;
+      --text-dark: #333;
     }
     body {
       margin: 0;
-      padding-top: 56px; /* για να μη σκεπάζει η navbar το περιεχόμενο */
+      padding-top: 56px; /* fixed navbar */
       font-family: 'Lato', sans-serif;
       background-color: var(--cream);
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      color: var(--text-dark);
+      line-height: 1.6;
     }
     .navbar-custom {
       background-color: var(--nav-bg);
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-    .logo {
-      margin: 40px 0;
-    }
-    .buttons {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-      width: 100%;
-      max-width: 400px;
-      margin-bottom: 40px;
-    }
-    .resource-button {
-      width: 100%;
-      padding: 14px 0;
-      background-color: var(--teal);
-      color: white;
-      border: 2px solid var(--gold);
-      border-radius: 4px;
+    header {
       text-align: center;
-      text-decoration: none;
-      font-size: 16px;
-      font-weight: bold;
-      transition: background-color 0.3s;
+      margin: 2rem 0;
     }
-    .resource-button:hover {
-      background-color: #004f57;
-      text-decoration: none;
+    header img {
+      max-width: 200px;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      color: var(--teal);
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+    .section {
+      margin-bottom: 3rem;
+    }
+    .section h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      font-size: 1.8rem;
+      border-bottom: 2px solid var(--teal);
+      display: inline-block;
+      padding-bottom: 0.2rem;
+      margin-bottom: 1rem;
+    }
+    .role-btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: 2px solid var(--teal);
+      padding: 0.5rem;
+      border-radius: 4px;
+      font-weight: bold;
+      color: var(--teal);
+      transition: background 0.3s, color 0.3s;
+    }
+    .role-btn:hover {
+      background: var(--teal);
       color: #fff;
+    }
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+      z-index: 1050;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-box {
+      background: #fff;
+      border-radius: 8px;
+      max-width: 500px;
+      width: 90%;
+      padding: 2rem;
+      position: relative;
+      transform: translateY(-20px);
+      transition: transform 0.3s;
+    }
+    .modal-overlay.active .modal-box {
+      transform: translateY(0);
+    }
+    .modal-box img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid var(--gold);
+      margin-bottom: 1rem;
+    }
+    .close-btn {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--teal);
+      cursor: pointer;
+    }
+    #modalRole {
+      font-weight: bold;
+      color: var(--gold);
     }
   </style>
 </head>
@@ -77,48 +140,204 @@
           <li class="nav-item"><a class="nav-link" href="https://pyleamun.github.io/pyleamun2026/">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="https://pyleamun.github.io/study-guides2026/">Study Guides</a></li>
           <li class="nav-item"><a class="nav-link" href="https://pyleamun.github.io/venues2026/">Venues</a></li>
-          <li class="nav-item"><a class="nav-link" href="https://pyleamun.github.io/people2026/">The People</a></li>
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="https://pyleamun.github.io/people2026/">The People</a></li>
           <li class="nav-item"><a class="nav-link" href="https://pyleamun.github.io/registration2026/">Registration</a></li>
-          <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Resources</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://pyleamun.github.io/resources2026/">Resources</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- Logo -->
-  <div class="logo text-center">
-    <img src="pyleaMUNfinallogo.png" alt="PyLEA MUN Logo" style="max-width: 200px; height: auto;">
+  <div class="container">
+    <header>
+      <img src="pyleaMUNfinallogo.png" alt="PyleaMUN Logo">
+      <h1>Meet the Team</h1>
+    </header>
+
+    <!-- Leadership -->
+    <div class="section">
+      <h2>PyleaMUN Leadership</h2>
+      <ul class="list-unstyled">
+        <li class="mb-2">
+          <button class="role-btn"
+                  data-name="Panagiotis Domvros"
+                  data-role="President & Director"
+                  data-img="domvros.png"
+                  data-info="Panagiotis oversees all conference operations and strategic direction.">
+            President & Director: Panagiotis Domvros
+          </button>
+        </li>
+        <li class="mb-2">
+          <button class="role-btn"
+                  data-name="Fani Vasilikou"
+                  data-role="Director & Chief Advisor"
+                  data-img="placeholder2.jpg"
+                  data-info="Fani provides guidance and ensures the conference meets educational goals.">
+            Director & Chief Advisor: Fani Vasilikou
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Core Executives -->
+    <div class="section">
+      <h2>Core Executives</h2>
+      <ul class="list-unstyled">
+        <li class="mb-2">
+          <button class="role-btn" data-name="[Name]" data-role="Finance Director" data-img="finance.png" data-info="Responsible for budget and finance planning.">
+            Finance Director
+          </button>
+        </li>
+        <li class="mb-2">
+          <button class="role-btn" data-name="[Name]" data-role="Press & Social Executive" data-img="press.png" data-info="Manages press releases and social media outreach.">
+            Press & Social Executive
+          </button>
+        </li>
+        <li class="mb-2">
+          <button class="role-btn" data-name="[Name]" data-role="Technical Executive Advisor" data-img="tech.png" data-info="Oversees technical logistics and support.">
+            Technical Executive Advisor
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- General Assembly Secretariat -->
+    <div class="section">
+      <h2>The General Assembly Secretariat</h2>
+      <ul class="list-unstyled">
+        <li class="mb-2">
+          <button class="role-btn" data-name="[Name]" data-role="President of the General Assembly" data-img="ga_president.png" data-info="Leads the General Assembly proceedings.">
+            President of the General Assembly
+          </button>
+        </li>
+        <li class="mb-2">
+          <button class="role-btn" data-name="[Name]" data-role="Secretary General" data-img="sec_gen.png" data-info="Coordinates documentation and records.">
+            Secretary General
+          </button>
+        </li>
+        <li class="mb-2">
+          <button class="role-btn" data-name="[Name]" data-role="Deputy President of the GA" data-img="dep_ga.png" data-info="Assists the President in facilitating sessions.">
+            Deputy President of the General Assembly
+          </button>
+        </li>
+        <li class="mb-2">
+          <button class="role-btn" data-name="[Name]" data-role="Deputy Secretary General" data-img="dep_sec.png" data-info="Supports the Secretary General with tasks.">
+            Deputy Secretary General
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Executive Team -->
+    <div class="section">
+      <h2>Executive Team</h2>
+      <ul class="list-unstyled">
+        <li class="mb-2">
+          <button class="role-btn" data-name="[Name]" data-role="Head of the Executives" data-img="head_exec.png" data-info="Heads the executive branch.">
+            Head of the Executives
+          </button>
+        </li>
+        <li class="mb-2">
+          <button class="role-btn" data-name="[Name]" data-role="Deputy Head of the Executives" data-img="dep_head_exec.png" data-info="Assists the Head of the Executives.">
+            Deputy Head of the Executives
+          </button>
+        </li>
+        <li class="mb-2">
+          <button class="role-btn" data-name="[Name]" data-role="Secretary of the Executives" data-img="sec_exec.png" data-info="Maintains executive documentation.">
+            Secretary of the Executives
+          </button>
+        </li>
+        <li class="mb-2">
+          <button class="role-btn" data-name="[Name]" data-role="Executive Member" data-img="exec_member.png" data-info="Contributes to executive decisions.">
+            Executive Member
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- The Staff -->
+    <div class="section">
+      <h2>The Staff</h2>
+      <ul class="list-unstyled">
+        <li class="mb-2">
+          <button class="role-btn" data-name="[Name]" data-role="Head of Staff" data-img="head_staff.png" data-info="Leads all staff operations.">
+            Head of Staff
+          </button>
+        </li>
+        <li class="mb-2">
+          <button class="role-btn" data-name="[Names]" data-role="Committee Staff Members" data-img="staff.png" data-info="Support individual committees.">
+            Committee Staff Members
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- The Press -->
+    <div class="section">
+      <h2>The Press</h2>
+      <ul class="list-unstyled">
+        <li class="mb-2">
+          <button class="role-btn" data-name="[Name]" data-role="Press Coordinator" data-img="press_coord.png" data-info="Oversees press team.">
+            Press Coordinator
+          </button>
+        </li>
+        <li class="mb-2">
+          <button class="role-btn" data-name="[Names]" data-role="Press Members" data-img="press_members.png" data-info="Handle media coverage.">
+            Press Members
+          </button>
+        </li>
+      </ul>
+    </div>
+
   </div>
 
-  <!-- Resource Buttons -->
-  <div class="buttons">
-    <a href="https://drive.google.com/drive/folders/1B7DZRzPhExEPl1z3UKMErQshaYGOu67l?usp=sharing" target="_blank" class="resource-button">
-      UN Environment Programme
-    </a>
-    <a href="https://drive.google.com/drive/folders/…SECURITY_COUNCIL_ID…" target="_blank" class="resource-button">
-      Security Council
-    </a>
-    <a href="https://drive.google.com/drive/folders/…ECOSOC_ID…" target="_blank" class="resource-button">
-      Economic and Social Council
-    </a>
-    <a href="https://drive.google.com/drive/folders/…NATO_ID…" target="_blank" class="resource-button">
-      NATO
-    </a>
-    <a href="https://drive.google.com/drive/folders/…WHO_ID…" target="_blank" class="resource-button">
-      World Health Organisation
-    </a>
-    <a href="https://drive.google.com/drive/folders/…HRC_ID…" target="_blank" class="resource-button">
-      Human Rights Council
-    </a>
-    <a href="https://drive.google.com/drive/folders/…UN_WOMEN_ID…" target="_blank" class="resource-button">
-      UN Women
-    </a>
-    <a href="https://drive.google.com/drive/folders/…GA_PLENARY_ID…" target="_blank" class="resource-button">
-      General Assembly Plenary
-    </a>
+  <!-- Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box">
+      <button class="close-btn" id="closeModal">&times;</button>
+      <img src="" alt="Profile Picture" id="modalImg">
+      <h3 id="modalName"></h3>
+      <p id="modalRole"></p>
+      <p id="modalInfo"></p>
+    </div>
   </div>
 
-  <!-- Bootstrap JS bundle -->
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const buttons     = document.querySelectorAll('.role-btn');
+      const overlay     = document.getElementById('modalOverlay');
+      const imgEl       = document.getElementById('modalImg');
+      const nameEl      = document.getElementById('modalName');
+      const roleEl      = document.getElementById('modalRole');
+      const infoEl      = document.getElementById('modalInfo');
+      const closeButton = document.getElementById('closeModal');
+
+      buttons.forEach(btn => {
+        btn.addEventListener('click', ({ currentTarget }) => {
+          imgEl.src = currentTarget.dataset.img || 'default-profile.png';
+          imgEl.onerror = function() { this.onerror = null; this.src = 'default-profile.png'; };
+          nameEl.textContent = currentTarget.dataset.name     || 'No name';
+          roleEl.textContent = currentTarget.dataset.role     || 'No role';
+          infoEl.textContent = currentTarget.dataset.info     || 'No info';
+
+          overlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+
+      function closeModal() {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      closeButton.addEventListener('click', closeModal);
+      overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && overlay.classList.contains('active')) closeModal();
+      });
+    });
+  </script>
 </body>
 </html>
